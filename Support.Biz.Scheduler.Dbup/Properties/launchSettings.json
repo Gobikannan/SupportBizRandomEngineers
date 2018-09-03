@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Support.Biz.Scheduler.Dbup": {
+      "commandName": "Project",
+      "commandLineArgs": "\"data source=YAALINI\\SQLEXPRESS;initial catalog=Scheduler;persist security info=True;user id=gobi;password=gobi123;\""
+    }
+  }
+}

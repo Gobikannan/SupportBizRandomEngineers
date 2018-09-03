@@ -1,0 +1,77 @@
+<mat-card>
+  <mat-card-title>
+    Shifts
+  </mat-card-title>
+  <mat-card-content>
+      <div class="row inputs-container">
+        <div class="col-md-3">
+          <mat-form-field>
+            <input matInput [matDatepicker]="startPicker" placeholder="Choose a Start Date" [(ngModel)]="startDate" (dateChange)="startDateChange()">
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field>
+            <input matInput [matDatepicker]="EndDatePicker" placeholder="End Date (10 working days from Start Date)" disabled [(ngModel)]="endDate">
+            <mat-datepicker-toggle matSuffix [for]="EndDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #EndDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <button class="fetch" mat-raised-button (click)="fetch()" color="primary">Fetch</button>
+          <button class="fetch" mat-raised-button (click)="clear()" color="primary">Clear</button>
+          <button class="fetch" mat-raised-button (click)="recreate()" color="primary">Clear &amp; Fetch</button>
+        </div>
+      </div>
+      <div class="row inputs-container">
+        <div class="col-md-7">
+          <span>
+              The next three options doesn't consider the start date. It defaults to the first working day of the upcoming week.
+          </span>
+          <button class="fetch-default" mat-raised-button (click)="fetchDefault()" color="primary">Fetch</button>
+          <button class="fetch-default" mat-raised-button (click)="clearDefault()" color="primary">Clear</button>
+          <button class="fetch-default" mat-raised-button (click)="recreateDefault()" color="primary">Clear &amp; Fetch</button>
+        </div>
+        <div class="col-md-5">
+            <span>
+                Here is the option to clear all schedules created in the system. It means, ALL.
+            </span>
+          <button class="fetch-default" mat-raised-button (click)="clealAllSchedules()" color="primary">Clear All Schedules</button>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-md-1" *ngIf="engineers.length > 0">
+        <mat-card>
+          <mat-card-title>
+            # of shifts:
+          </mat-card-title>
+          <mat-card-content>
+            <p *ngFor="let er of engineers">
+              <span matBadge="{{er.ShiftTotalCount}}" matBadgeOverlap="false">{{er.Name}}</span>
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-md-11">
+        <mat-grid-list cols="5" gutterSize="1">
+          <mat-grid-tile *ngFor="let day of shifts">
+            <mat-card>
+              <mat-card-title>
+                <b>{{day.date | date}}</b>
+              </mat-card-title>
+              <mat-divider></mat-divider>
+              <mat-card-content>
+                <mat-list>
+                  <mat-list-item *ngFor="let shift of day.shifts">{{shift.shiftPeriodDescription}} by&nbsp;
+                    <strong>{{shift.engineerName}}</strong>
+                  </mat-list-item>
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

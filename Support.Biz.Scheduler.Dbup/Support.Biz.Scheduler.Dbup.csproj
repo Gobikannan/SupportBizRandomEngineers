@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <StartupObject>Support.Biz.Scheduler.Dbup.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Migrations\V1\1_CreateTables.sql" />
+    <None Remove="Migrations\V1\2_MockEngineersData.sql" />
+    <None Remove="Migrations\V2\1_CreateShiftTables.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\V1\1_CreateTables.sql" />
+    <EmbeddedResource Include="Migrations\V1\2_MockEngineersData.sql" />
+    <EmbeddedResource Include="Migrations\V2\1_CreateShiftTables.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup" Version="4.1.0" />
+    <PackageReference Include="dbup-consolescripts" Version="1.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+
+</Project>
